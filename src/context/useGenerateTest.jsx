@@ -1,11 +1,13 @@
 /* eslint-disable */
-const { ipcRenderer } = require('electron');
-// used to format testFileCode which is a string
-// --> makes sure code is readable
+import { useContext } from "react";
+const {ipcRenderer} = require('electron');
 const beautify = require('js-beautify');
+import { GlobalContext } from "./reducers/globalReducer";
 
 function useGenerateTest(test, projectFilePath) {
   return (testState, mockDataState) => {
+    const[{testFramework = 'jest'} = useContext(GlobalContext)];
+    const isMocha = testFramework === 'mocha';
     let testFileCode = '';
 
     /* ------------------------------------------ SOLID IMPORT + TEST STATEMENTS ------------------------------------------ */
@@ -15,7 +17,7 @@ function useGenerateTest(test, projectFilePath) {
       let filePath = ipcRenderer.sendSync(
         'Universal.path',
         projectFilePath,
-        componentPath
+        componentPathx
       );
       filePath = filePath.replace(/\\/g, '/');
       const formattedComponentName =

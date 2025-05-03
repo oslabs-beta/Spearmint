@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
+//individual block components for each statement type
 import Middleware from '../ReduxTestComponent/Middleware/Middleware';
 import ActionCreator from '../ReduxTestComponent/ActionCreator/ActionCreator';
 import Async from '../ReduxTestComponent/Thunk/Thunk';
 import Reducer from '../ReduxTestComponent/Reducer/Reducer';
-import { ReduxTestCaseContext } from '../../context/reducers/reduxTestCaseReducer';
-import { ReduxStatements } from '../../utils/reduxTypes';
+import { ReduxTestCaseContext } from '../../context/reducers/reduxTestCaseReducer'; 
+import { ReduxStatements } from '../../utils/reduxTypes'; //type definition on how statements are structured
 import SearchInput from '../SearchInput/SearchInput';
 import { GlobalContext } from '../../context/reducers/globalReducer';
+//actions to record where imports should pint (updates A1 State)
 import {
   updateReducersFilePath,
   updateMiddlewaresFilePath,
@@ -14,17 +16,18 @@ import {
   updateActionsFilePath,
 } from '../../context/actions/reduxTestCaseActions';
 import '../SearchInput/SearchInput.scss';
-import importOptionsSwitch from './importOptions';
+import importOptionsSwitch from './importOptions'; //determines which imports to show
 import styles from './TestCase.module.scss';
 
 const ReduxTestStatements = () => {
   /* destructing from the reducer */
   const [{ reduxStatements }, dispatchToReduxTestCase] = useContext(ReduxTestCaseContext);
   const [{ filePathMap, theme }] = useContext<any>(GlobalContext);
-
+  //boolean variables 
   const { isReducerOn, isMiddleWareOn, isActionCreatorOn, isAsyncOn } = importOptionsSwitch(
     reduxStatements
   );
+  //set imports to null
   let reducerImports = null;
   let mImports = null;
   let aCImports = null;

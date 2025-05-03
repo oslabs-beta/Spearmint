@@ -8,10 +8,13 @@ import {
   ReduxStatements,
 } from '../../utils/reduxTypes';
 
+
 export const toggleRedux = (): ReduxActionTypes => ({
   type: actionTypes.TOGGLE_REDUX,
 });
-export const updateReduxTestStatement = (reduxTestStatement: string): ReduxActionTypes => ({
+export const updateReduxTestStatement = (
+  reduxTestStatement: string
+): ReduxActionTypes => ({
   type: actionTypes.UPDATE_REDUX_TEST_STATEMENT,
   payload: reduxTestStatement,
 });
@@ -22,7 +25,9 @@ export const deleteMiddleware = (id: number): ReduxActionTypes => ({
   type: actionTypes.DELETE_MIDDLEWARE,
   payload: id,
 });
-export const updateMiddleware = (updateMiddleware: UpdateMiddleware): ReduxActionTypes => ({
+export const updateMiddleware = (
+  updateMiddleware: UpdateMiddleware
+): ReduxActionTypes => ({
   type: actionTypes.UPDATE_MIDDLEWARE,
   payload: updateMiddleware,
 });
@@ -57,7 +62,9 @@ export const deleteReducer = (id: number): ReduxActionTypes => ({
   type: actionTypes.DELETE_REDUCER,
   payload: id,
 });
-export const updateReducer = (updatedReducer: UpdateReducer): ReduxActionTypes => ({
+export const updateReducer = (
+  updatedReducer: UpdateReducer
+): ReduxActionTypes => ({
   type: actionTypes.UPDATE_REDUCER,
   payload: updatedReducer,
 });
@@ -131,5 +138,17 @@ export const reduxReplaceTest = (testState: object) => ({
 });
 
 export const resetTests = () => ({
-  type: actionTypes.RESET_TESTS
+  type: actionTypes.RESET_TESTS,
 });
+
+export const addMochaChai = (): ReduxActionTypes => {
+  type: actionTypes.ADD_MOCHA_CHAI;
+};
+
+export const updateMochaChai = (): ReduxActionTypes => {
+  type: actionTypes.UPDATE_MOCHA_CHAI;
+};
+
+export const deleteMochaChai = (): ReduxActionTypes => {
+  type: actionTypes.DELETE_MOCHA_CHAI;
+};
