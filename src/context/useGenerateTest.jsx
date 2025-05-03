@@ -209,29 +209,29 @@ function useGenerateTest(test, projectFilePath) {
     /* ------------------------------------------ REDUX IMPORT + TEST STATEMENTS ------------------------------------------ */
 
     // Redux Import Statements
-    function addReduxImportStatements() {
+    function addReduxImportStatements(isMocha) {
       reduxTestCase.reduxStatements.forEach((statement) => {
         switch (statement.type) {
           case 'async':
             return (
-              addAsyncImportStatement(statement),
+              addAsyncImportStatement(statement, isMocha),
               createPathToActions(statement),
               createPathToTypes(statement),
               addAsyncVariables()
             );
           case 'action-creator':
             return (
-              addActionCreatorImportStatement(statement),
+              addActionCreatorImportStatement(statement, isMocha),
               createPathToActions(statement),
               createPathToTypes(statement)
             );
           case 'middleware':
             return (
-              addMiddlewareImportStatement(), createPathToMiddlewares(statement)
+              addMiddlewareImportStatement(isMocha), createPathToMiddlewares(statement)
             );
           case 'reducer':
             return (
-              addReducerImportStatement(),
+              addReducerImportStatement(isMocha),
               createPathToReducers(statement),
               createPathToTypes(statement)
             );
@@ -243,32 +243,36 @@ function useGenerateTest(test, projectFilePath) {
     }
 
     // Async Import Statements
-    function addAsyncImportStatement(async) {
-      if (!testFileCode.includes(`import { fake } from 'test-data-bot';`)) {
-        testFileCode = `import { fake } from 'test-data-bot';`.concat(
-          testFileCode
-        );
-      }
-      if (
-        !testFileCode.includes(
-          `import '@testing-library/jest-dom/extend-expect';`
-        )
-      ) {
-        testFileCode =
-          `import '@testing-library/jest-dom/extend-expect';`.concat(
-            testFileCode
-          );
-      }
-      if (
-        !testFileCode.includes(`import configureMockStore from 'redux-mock-store';
-      import thunk from 'redux-thunk';
-      import fetchMock from 'fetch-mock';`)
-      ) {
-        testFileCode = `import configureMockStore from 'redux-mock-store';
-      import thunk from 'redux-thunk';
-      import fetchMock from 'fetch-mock';`.concat(testFileCode);
-      }
+  function addAsyncImportStatement(stmt, isMocha) {
+  // import your mock-store setup once
+  const storeImports = [
+    `import configureMockStore from 'redux-mock-store';`,
+    `import thunk from 'redux-thunk';`,
+    `import fetchMock from 'fetch-mock';`,
+  ].join('\n');
+  if (!testFileCode.includes(`import configureMockStore from 'redux-mock-store'`)) {
+    testFileCode = `${storeImports}\n${testFileCode}`;
+  }
+
+  // import test-data-bot once
+  if (!testFileCode.includes(`import { fake } from 'test-data-bot'`)) {
+    testFileCode = `import { fake } from 'test-data-bot';\n${testFileCode}`;
+  }
+
+  // check if using Mocha then import mocha libraries otherwise import jest libraries
+  if (isMocha) {
+    if (!testFileCode.includes(`import { expect } from 'chai'`)) {
+      testFileCode = `import { expect } from 'chai';\n${testFileCode}`;
     }
+    if (!testFileCode.includes(`import { describe, it } from 'mocha'`)) {
+      testFileCode = `import { describe, it } from 'mocha';\n${testFileCode}`;
+    }
+  } else {
+    if (!testFileCode.includes(`import '@testing-library/jest-dom/extend-expect'`)) {
+      testFileCode = `import '@testing-library/jest-dom/extend-expect';\n${testFileCode}`;
+    }
+  }
+}
 
     function addAsyncVariables() {
       if (
@@ -281,40 +285,40 @@ function useGenerateTest(test, projectFilePath) {
     }
 
     // AC Import Statements
-    function addActionCreatorImportStatement(action) {
-      if (
-        !testFileCode.includes(`import { fake } from 'test-data-bot';`) &&
-        action.payloadKey
-      ) {
-        testFileCode = `import { fake } from 'test-data-bot';`.concat(
-          testFileCode
-        );
-      }
-      if (
-        !testFileCode.includes(
-          `import '@testing-library/jest-dom/extend-expect';`
-        )
-      ) {
-        testFileCode =
-          `import '@testing-library/jest-dom/extend-expect';`.concat(
-            testFileCode
-          );
-      }
+    function addActionCreatorImportStatement(action, isMocha) {
+  if (!testFileCode.includes(`import { fake } from 'test-data-bot';`) &&
+      action.payloadKey) {
+    testFileCode = `import { fake } from 'test-data-bot';\n` + testFileCode;
+  }
+
+  if (isMocha) {
+    if (!testFileCode.includes(`import { expect } from 'chai';`)) {
+      testFileCode = `import { expect } from 'chai';\n` + testFileCode;
     }
+  } else {
+    if (!testFileCode.includes(`import '@testing-library/jest-dom/extend-expect';`)) {
+      testFileCode = `import '@testing-library/jest-dom/extend-expect';\n` + testFileCode;
+    }
+  }
+}
 
     // Reducer Import Statements
-    function addReducerImportStatement() {
+    function addReducerImportStatement(isMocha) {
       // if (!testFileCode.includes(`import { render } from '@testing-library/react';`)) {
       //   testFileCode += `import { render } from '@testing-library/react';`;
       // }
-      if (
-        !testFileCode.includes(
-          `import '@testing-library/jest-dom/extend-expect';`
-        )
-      ) {
+    if (!isMocha) {
+      if (!testFileCode.includes(`import '@testing-library/jest-dom/extend-expect';`)) {
         testFileCode += `import '@testing-library/jest-dom/extend-expect';\n`;
       }
+     }
+     // for Mocha/Chai, pull in Chai’s expect:
+     // else {
+     if (!testFileCode.includes(`import { expect } from 'chai';`)) {
+      testFileCode += `import { expect } from 'chai';\n`;
     }
+  }
+    
 
     function addReducerDescribeBlock(reducer) {
       // if (!testFileCode.includes('describe')) {
@@ -328,15 +332,30 @@ function useGenerateTest(test, projectFilePath) {
     }
 
     // Middleware Import Statements
-    function addMiddlewareImportStatement() {
-      if (
-        !testFileCode.includes(
-          `import '@testing-library/jest-dom/extend-expect';`
-        )
-      ) {
-        testFileCode += `import '@testing-library/jest-dom/extend-expect';`;
-      }
+  function addMiddlewareImportStatement() {
+  if (isMocha) {
+    // For Mocha + Chai, bring in chai’s expect and chai-dom
+    if (
+      !testFileCode.includes(`const { expect } = require('chai');`)
+    ) {
+      testFileCode = `const { expect } = require('chai');\n`.concat(testFileCode);
     }
+    if (
+      !testFileCode.includes(`const chaiDom = require('chai-dom');`)
+    ) {
+      testFileCode = `const chaiDom = require('chai-dom');\nchai.use(chaiDom);\n`.concat(
+        testFileCode
+      );
+    }
+  } else {
+    // Default Jest behavior
+    if (
+      !testFileCode.includes(`import '@testing-library/jest-dom/extend-expect';`)
+    ) {
+      testFileCode += `import '@testing-library/jest-dom/extend-expect';`;
+    }
+  }
+}
 
     // Redux Test Statements
     function addReduxTestStatements() {
