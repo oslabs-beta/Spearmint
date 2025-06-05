@@ -72,7 +72,7 @@ Please pull down the image from [Docker hub](https://hub.docker.com/repository/d
 
 For developers: [README-dev.md](https://github.com/open-source-labs/spearmint/blob/main/README-dev.md). This containes more information specific to developers such as data systems, outlines of the application, turning on dev tools, etc.
 
-# New features with version 0.14.0
+# New features with version 0.14.1
 
 - Increased Typescript coverage – Spearmint is now majority Typescript!
 
@@ -83,6 +83,30 @@ For developers: [README-dev.md](https://github.com/open-source-labs/spearmint/bl
 - Updated a variety of dependencies and libraries
 
 - Added documentation for future developers
+
+- Added Mocha with Chai and Sinon as Testing Libraries for expanded project compatability
+
+- Added Cypress test type card – Users can now select the Cypress test type when generating tests, enhancing flexibility when defining test suites.
+
+- Integrated Cypress test generation – Spearmint now supports generating Cypress tests for React applications, allowing users to create end-to-end (E2E)
+  tests directly from the GUI.
+
+- Enhanced UI for Cypress testing – Introduced an intuitive interface for building Cypress test cases, including support for visits, selectors, actions, and
+  assertions. Dynamic placeholders and input enablement improve usability when constructing complex test steps.
+
+- Render Block, Action Block, and Assertions – Added support for generating a before(() => cy.visit()) block when a base URL is provided, and endpoint-based
+  cy.visit() calls within render blocks. Users can also define detailed action blocks and dynamic assertions, improving test coverage for interactive
+  workflows.
+
+- Step-by-step Cypress test creation – Implemented step-wise Cypress command generation (e.g., cy.get().click(), cy.get().type().blur())
+  through the Spearmint GUI, allowing precise control over each test step.
+
+- Typed Cypress feature with TypeScript – Developed the Cypress feature in TypeScript, maintaining Spearmint’s type safety standards and
+  improving code clarity, maintainability, and developer experience.
+
+- Filetype for testing Libraries Now toggle with Library Selection.
+
+- Test Suite Directory Names now toggle with Library Selection.
 
 <br>
 
@@ -106,6 +130,11 @@ For developers: [README-dev.md](https://github.com/open-source-labs/spearmint/bl
   - Monitor for other opportunities to update dependencies or otherwise improve the program with different libraries or tools.
 7. _Revamp UI for certain test cases:_
   - Some of test cases needs improvement on UI as they do not have any styling or optimal user experience
+8. _Continue porting Testing Library coverage to app_
+  - Sinon mocking is still under development and needs to be finished to mock data for Mocha tests
+  - Import statements are needing a look over for Mocha and Sinon
+  - Vitest support may also be a good idea because of Vite's popularity
+9. _Cypress ui is the new interface, it has not been universally implimented_
 
 <br>
 
@@ -114,6 +143,7 @@ For developers: [README-dev.md](https://github.com/open-source-labs/spearmint/bl
 1. Screen reader for Accessibilty can turn on and off but does not read.
 2.	Text to speech not functioning properly under Accessibility
 3.	Some elements of draggable remaining in Redux test case components
+4.  drop down matchers in react are behind the button
 
 <br>
 
