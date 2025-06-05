@@ -5,6 +5,7 @@
 </p>
 
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![Cypress](https://img.shields.io/badge/cypress-17202C?style=for-the-badge&logo=cypress&logoColor=white)
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
@@ -38,7 +39,7 @@ Please refer to [README-dev.md](https://github.com/open-source-labs/spearmint/bl
       <img alt="spearmint gif" src="public/openFolder.webp" width="800px">
    </picture>
 
-2. Utilize our auto-complete, drop-down options, and tooltips features to easily create arrangement, action, and assertion test statements for React, Vue, Svelte, and Solid; reducer, action creator, asynchronous action creator, and middleware test statements for Redux; and hooks, context, endpoint, and GraphQL test statements.
+2. Chose a testing framework: Jest, Cypress(beta-React), or Mocha, tilizing our auto-complete, drop-down options, and tooltips features to easily create arrangement, action, and assertion test statements for React, Vue, Svelte, and Solid; reducer, action creator, asynchronous action creator, and middleware test statements for Redux; and hooks, context, endpoint, and GraphQL test statements.
 3. Spearmint will then convert user input to dynamically generate a test file in the Code Editor.
    <picture>
       <source media="(prefers-color-scheme: dark)" srcset="public/SpearmintGenerateTest.webp">
@@ -72,7 +73,7 @@ Please pull down the image from [Docker hub](https://hub.docker.com/repository/d
 
 For developers: [README-dev.md](https://github.com/open-source-labs/spearmint/blob/main/README-dev.md). This containes more information specific to developers such as data systems, outlines of the application, turning on dev tools, etc.
 
-# New features with version 0.14.0
+# features with version 0.14.0
 
 - Increased Typescript coverage – Spearmint is now majority Typescript!
 
@@ -86,6 +87,18 @@ For developers: [README-dev.md](https://github.com/open-source-labs/spearmint/bl
 
 <br>
 
+# New features with version 0.14.1
+
+- Integrated Cypress test generation – Spearmint now supports generating Cypress tests for React applications, allowing users to generate E2E tests from the GUI.
+- 
+- Typed Cypress feature with TypeScript – Followed Spearmint's existing TypeScript standards when building the Cypress integration, ensuring strong type safety, better developer experience, and maintainable test generation logic.
+
+- Added Cypress test type card – Users can now select the Cypress test type when generating tests, enhancing flexibility when defining test suites.
+  
+- Render Block, Action Block and Assertions – Introduced the ability to create generates a before( cy.visit(BaseURl) when a base URL is provided to navigate to specific routes before executing user interaction steps and a cy.visit(/Endpoint).  detailed action blocks for Cypress tests with dynamic assertions, and dynamic placeholders, improving test coverage for user interactions.
+
+<br>
+
 # Iteration Roadmap
 
 1. _Continuing TypeScript Conversion:_
@@ -94,10 +107,10 @@ For developers: [README-dev.md](https://github.com/open-source-labs/spearmint/bl
   - There is a framework for login, including GitHub and Google, however it is not implemented
   - Adding more features to make login and user data more valuable, such as favorited or saved tests, saved templates, etc.
 3. _Adding more testing:_
-  - Deeper testing of existing frameworks should probably be the main priority here as many frameworks are implemented already, but could use more fleshed-out features
-  - Adding additional frameworks is a possibility if there is a strong case for them, but adding more robustness to the current test suites is probably more important
+  - ***Deeper testing of existing frameworks should probably be the main priority here as many frameworks are implemented already, but could use more fleshed-out features
+  - ***Adding additional frameworks is a possibility if there is a strong case for them, but adding more robustness to the current test suites is probably more important
 4. _Add functionality for exporting test files as Typescript_
-  - Currently the only export option is vanilla Javascript
+  - Currently the only export option is vanilla Javascript 
 5. _Continue to extend internal testing coverage_
   - A far greater amount of the application is tested now than it was previously, but there is more work to do on this
 6. _Update some dependencies and tools_
@@ -105,7 +118,7 @@ For developers: [README-dev.md](https://github.com/open-source-labs/spearmint/bl
   - Consider implementing React Dev Tools or react-dnd to restore the drag-drop functionality
   - Monitor for other opportunities to update dependencies or otherwise improve the program with different libraries or tools.
 7. _Revamp UI for certain test cases:_
-  - Some of test cases needs improvement on UI as they do not have any styling or optimal user experience
+  - ***Some of test cases needs improvement on UI as they do not have any styling or optimal user experience
 
 <br>
 
@@ -164,6 +177,9 @@ For developers: [README-dev.md](https://github.com/open-source-labs/spearmint/bl
 |  Mahmoud 'Mo' Hmaidi  |      [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mhmaidi789)      |      [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mahmoud-hmaidi-mo/)       |
 |      Max Bromet       |       [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mbromet)        |     [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/max-bromet-2607aa211/)     |
 |   Max Weisenberger    |      [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/MaxWeisen)       |          [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/maxweisen/)           |
+
+|      Mickael Contreras       |       [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Mcdev10011)        |          [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/Mickael-Contrersas/)          |
+
 |      Mike Coker       |       [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mbcoker)        |          [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mike-coker/)          |
 |       Mina Koo        |       [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/alsdk850)       |           [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/minakoo/)            |
 |     Myles Tsutsui     |     [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mylestsutsui)     |         [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mylestsutsui/)         |
