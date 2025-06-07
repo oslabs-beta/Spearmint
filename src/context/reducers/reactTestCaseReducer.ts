@@ -22,7 +22,7 @@ export const reactTestCaseState: ReactTestCaseTypes = {
   itId: 1,
   statementId: 1,
   propId: 1,
-  visitId: 1, // ! unsure if this should be 1
+  visitId: 0, // ! unsure if this should be 1
   stepId: 1,
   describeBlocks: {
     byId: {
