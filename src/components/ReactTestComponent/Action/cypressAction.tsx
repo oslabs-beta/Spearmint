@@ -21,8 +21,7 @@ const CypressAction = ({
   statement,
   statementId,
 }: ReactTestComponentAssertion): JSX.Element => {
-  const [{ statements }, dispatchToReactTestCase] =
-    useContext(ReactTestCaseContext); // [describe, it, action ] blocks.. reactTestCaseReducer
+  const [{ statements }, dispatchToReactTestCase] = useContext(ReactTestCaseContext); // [describe, it, action ] blocks.. reactTestCaseReducer
 
   const [{ theme }] = useContext(GlobalContext);
 

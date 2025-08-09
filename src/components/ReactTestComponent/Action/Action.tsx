@@ -38,8 +38,7 @@ const Action = ({
   itId,
 }: ReactTestComponentAssertion): JSX.Element => {
   const [{ mockData }] = useContext(MockDataContext); // only  used if added
-  const [{ statements }, dispatchToReactTestCase] =
-    useContext(ReactTestCaseContext); // test case data, [describe, it, action ] blocks.. reactTestCaseReducer
+  const [{ statements }, dispatchToReactTestCase] = useContext(ReactTestCaseContext); // test case data, [describe, it, action ] blocks.. reactTestCaseReducer
 
   const [{ theme, testFramework }] = useContext(GlobalContext);
 

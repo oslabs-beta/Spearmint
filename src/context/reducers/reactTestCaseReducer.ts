@@ -22,7 +22,7 @@ export const reactTestCaseState: ReactTestCaseTypes = {
   itId: 1,
   statementId: 1,
   propId: 1,
-  visitId: 1, // ! unsure if this should be 1
+  visitId: 1, 
   stepId: 1,
   describeBlocks: {
     byId: {
@@ -984,5 +984,6 @@ const reactTestCaseArr: [ReactTestCaseTypes, (action: Action) => void] = [
   reactTestCaseState, // state
   dispatchToReactTestCase, // dispatch
 ];
+
 //** this is the dispatcher were grabbing */
 export const ReactTestCaseContext = createContext(reactTestCaseArr);
